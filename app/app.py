@@ -44,15 +44,15 @@ st.sidebar.markdown("---")
 st.sidebar.success("""
 ### ❤️ Heart Health Tips
 
-✔ Exercise regularly
+✔ Exercise Regularly
 
-✔ Eat a balanced diet
+✔ Eat a Balanced Diet
 
-✔ Avoid smoking
+✔ Avoid Smoking
 
-✔ Maintain healthy weight
+✔ Maintain Healthy Weight
 
-✔ Monitor blood pressure
+✔ Monitor Blood Pressure
 """)
 
 st.sidebar.info("""
@@ -79,55 +79,25 @@ with col1:
         help="0=Typical Angina\n1=Atypical Angina\n2=Non-anginal Pain\n3=Asymptomatic"
     )
 
-    trestbps = st.number_input(
-        "Resting Blood Pressure",
-        value=120
-    )
+    trestbps = st.number_input("Resting Blood Pressure", value=120)
 
-    chol = st.number_input(
-        "Serum Cholesterol",
-        value=200
-    )
+    chol = st.number_input("Serum Cholesterol", value=200)
 
-    fbs = st.selectbox(
-        "Fasting Blood Sugar >120 mg/dl",
-        [0,1]
-    )
+    fbs = st.selectbox("Fasting Blood Sugar >120 mg/dl", [0,1])
 
-    restecg = st.selectbox(
-        "Resting ECG",
-        [0,1,2]
-    )
+    restecg = st.selectbox("Resting ECG", [0,1,2])
 
-    thalach = st.number_input(
-        "Maximum Heart Rate Achieved",
-        value=150
-    )
+    thalach = st.number_input("Maximum Heart Rate Achieved", value=150)
 
-    exang = st.selectbox(
-        "Exercise Induced Angina",
-        [0,1]
-    )
+    exang = st.selectbox("Exercise Induced Angina", [0,1])
 
-    oldpeak = st.number_input(
-        "Oldpeak",
-        value=1.0
-    )
+    oldpeak = st.number_input("Oldpeak", value=1.0)
 
-    slope = st.selectbox(
-        "Slope",
-        [0,1,2]
-    )
+    slope = st.selectbox("Slope", [0,1,2])
 
-    ca = st.selectbox(
-        "Number of Major Vessels",
-        [0,1,2,3]
-    )
+    ca = st.selectbox("Number of Major Vessels", [0,1,2,3])
 
-    thal = st.selectbox(
-        "Thal",
-        [0,1,2]
-    )
+    thal = st.selectbox("Thal", [0,1,2])
 
 with col2:
 
@@ -155,7 +125,6 @@ st.markdown("---")
 if st.button("🔍 Predict Heart Disease"):
 
     input_data = np.array([[
-
         age,
         sex,
         cp,
@@ -169,29 +138,22 @@ if st.button("🔍 Predict Heart Disease"):
         slope,
         ca,
         thal
-
     ]])
 
     input_scaled = scaler.transform(input_data)
 
     prediction = model.predict(input_scaled)
-    
 
     probability = model.predict_proba(input_scaled)[0][1]
 
     st.subheader("Prediction Result")
 
     if prediction[0] == 1:
-
         st.error("⚠️ High Risk of Heart Disease")
-
-        st.image("../images/warning.png", width=300)
-
+        st.image("../images/warning.png", width=250)
     else:
-
         st.success("✅ Low Risk of Heart Disease")
-
-        st.image("../images/healthy.png", width=300)
+        st.image("../images/healthy.png", width=250)
 
     st.markdown("---")
 
@@ -201,13 +163,16 @@ if st.button("🔍 Predict Heart Disease"):
 
     st.write(f"### Probability of Heart Disease: **{probability:.2%}**")
 
-if probability < 0.30:
-    st.success("🟢 Risk Level: LOW")
-elif probability < 0.70:
-    st.warning("🟡 Risk Level: MODERATE")
-else:
-    st.error("🔴 Risk Level: HIGH")
-    
+    # -------------------- Risk Level --------------------
+
+    if probability < 0.30:
+        st.success("🟢 Risk Level: LOW")
+
+    elif probability < 0.70:
+        st.warning("🟡 Risk Level: MODERATE")
+
+    else:
+        st.error("🔴 Risk Level: HIGH")
 
     st.markdown("---")
 
@@ -224,7 +189,7 @@ else:
 
 - 💊 Take Medications as Prescribed
 
-- 🩸 Monitor Blood Pressure & Cholesterol
+- 🩸 Monitor Blood Pressure
 
 - 🚭 Quit Smoking
 """)
