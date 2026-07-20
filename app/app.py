@@ -3,8 +3,8 @@ import joblib
 import numpy as np
 
 # -------------------- Load Model --------------------
-model = joblib.load("../models/heart_model.pkl")
-scaler = joblib.load("../models/scaler.pkl")
+model = joblib.load("heart_model.pkl")
+scaler = joblib.load("scaler.pkl")
 
 # -------------------- Page Config --------------------
 st.set_page_config(
